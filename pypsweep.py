@@ -67,8 +67,11 @@ def ping_all_ips(ip_list):
 ip_list = init_ip_range()
 if ip_list:
     results = ping_all_ips(ip_list)
+
+    # Sort results by IP address
+    sorted_results = sorted(results, key=lambda x: int(ipaddress.IPv4Address(x[0])))
     
     print(f"{'IP':<15}{'Reachable':<15}{'Hostname':<30}")
     print("=" * 60)
-    for ip, reachable, hostname in results:
+    for ip, reachable, hostname in sorted_results:
         print(f"{ip:<15} {str(reachable):<15} {hostname:<30}")
